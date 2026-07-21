@@ -1,0 +1,10 @@
+services:
+  latex-compiler:
+    image: texlive/texlive:latest
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    command: >
+      bash -c "cd output &&
+      latexmk -pdf -interaction=nonstopmode MasterThesis.tex &&
+      cp MasterThesis.pdf TFM_Final.pdf"
