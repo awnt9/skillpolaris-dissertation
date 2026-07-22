@@ -32,6 +32,7 @@ Human-in-the-loop pipeline:
 1. READ: `agent_context/PROJECT.md`, `agent_context/DESIGN.md`, and `agent_context/OUTLINE.md` for context.
 2. THINK: Plan your search strategy.
 3. EXECUTE: Run `uv run tools/fetch_papers.py "[topic]"` in the terminal.
+   - **Network:** OpenAlex is blocked in the default sandbox. Always request unrestricted network for this command (e.g. Shell `required_permissions: ["full_network"]`). Do not treat the first sandbox `ProxyError`/`403` as an API failure — retry with full network immediately.
 4. SYNTHESIZE: Discuss findings with the user in chat, strictly based on retrieved academic data.
 5. PROPOSE: Suggest outline adjustments or BibTeX entries **in chat only**.
 6. DO NOT modify `bibliography.bib`, `.tex` files, or other project files — **except** `agent_context/STATUS.md` (and `OUTLINE.md` only if the user approved outline changes in this turn).

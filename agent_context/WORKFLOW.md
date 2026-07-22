@@ -92,7 +92,7 @@ There is **no** `/update_status` command. Progress tracking is automatic.
 | Action | Target |
 |--------|--------|
 | Read | `PROJECT.md`, `DESIGN.md`, `OUTLINE.md` |
-| Run | `uv run tools/fetch_papers.py` |
+| Run | `uv run tools/fetch_papers.py` (**always with full network** — OpenAlex fails in the default sandbox with ProxyError/403; use Shell `required_permissions: ["full_network"]`) |
 | Output | Chat (proposed BibTeX, outline ideas) |
 | Write | `STATUS.md` (always); `OUTLINE.md` only if user approved index changes |
 

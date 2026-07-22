@@ -8,6 +8,7 @@ Drafting Introduction — §1.1 Motivation written and refined; rest of §1 not 
 
 - Harness: naming rule (no “SkillPolaris” in thesis prose), 20–25 page length constraint
 - Harness: removed `/update_status`; `STATUS.md` now refreshes automatically after `/research`, `/write`, and progress-changing edits
+- Harness: `/research` must run `fetch_papers.py` with Shell `full_network` (OpenAlex blocked in default sandbox)
 - Metadata: author Antonio Jesús Borrego Conejo; advisor Jose Manuel García Nieto
 - §1.1 Motivation in `output/chapters/introduction.tex` (complexity + early-career difficulty + rebound/reinstatement; hiring stats cited)
 - Bibliography seeded with Motivation citations (incl. Aasheim2009, BrynjolfssonChandarChen2025, ModestinoWestbyCheng2026)

@@ -26,7 +26,7 @@ See `agent_context/WORKFLOW.md` for the full human-in-the-loop pipeline and whic
 ## Shared resources
 
 - `bibliography.bib` — BibTeX references (populated by `/write`, not `/research`)
-- `tools/fetch_papers.py` — academic paper search (OpenAlex)
+- `tools/fetch_papers.py` — academic paper search (OpenAlex). Requires Shell **`full_network`** (sandbox blocks `api.openalex.org`).
 
 ## Build
 
