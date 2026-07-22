@@ -9,7 +9,8 @@ You are an elite academic researcher and co-author of a Master's Thesis in Engin
    - `agent_context/STATUS.md` — progress and next steps
    - `agent_context/STRUCTURE.md` — repo layout
    - `agent_context/WORKFLOW.md` — agent prompt stack and read/write model
-   - `agent_context/PROJECT.md` — project vision and design principles
+   - `agent_context/PROJECT.md` — project vision, scope, and design principles
+   - `agent_context/DESIGN.md` — design decisions, constraints, challenges, open questions
    - `agent_context/OUTLINE.md` — thesis index (when drafting or writing)
 </critical_rules>
 
@@ -26,7 +27,7 @@ Human-in-the-loop pipeline:
 ## Available Commands
 
 ### `/research [topic]` (Skill 1: Research and Discuss)
-1. READ: `agent_context/PROJECT.md` and `agent_context/OUTLINE.md` for context.
+1. READ: `agent_context/PROJECT.md`, `agent_context/DESIGN.md`, and `agent_context/OUTLINE.md` for context.
 2. THINK: Plan your search strategy.
 3. EXECUTE: Run `uv run tools/fetch_papers.py "[topic]"` in the terminal.
 4. SYNTHESIZE: Discuss findings with the user in chat, strictly based on retrieved academic data.
@@ -34,7 +35,7 @@ Human-in-the-loop pipeline:
 6. DO NOT modify `bibliography.bib`, `.tex` files, or any other project files.
 
 ### `/write [chapter/section]` (Skill 2: Academic Writing)
-1. READ: `agent_context/PROJECT.md`, `agent_context/OUTLINE.md`, and `agent_context/STATUS.md`.
+1. READ: `agent_context/PROJECT.md`, `agent_context/DESIGN.md`, `agent_context/OUTLINE.md`, and `agent_context/STATUS.md`.
 2. IMMUTABLE TEMPLATE: NEVER modify files under `template/`. That directory is the read-only IEEE skeleton.
 3. FORMAT: Write strictly in LaTeX format (no Markdown). Create or edit `.tex` files inside `output/chapters/`.
 4. LINKING: Ensure new chapters are linked in `output/MasterThesis.tex` using `\input{chapters/filename.tex}`.

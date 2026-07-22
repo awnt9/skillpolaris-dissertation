@@ -7,7 +7,8 @@
 | `agent_context/STATUS.md` | Current progress, next steps, blockers |
 | `agent_context/STRUCTURE.md` | This file — repo layout reference |
 | `agent_context/WORKFLOW.md` | Agent prompt stack, flow, and read/write matrix |
-| `agent_context/PROJECT.md` | Stable project vision — objectives, success criteria, approach |
+| `agent_context/PROJECT.md` | Stable project vision — objectives, scope, success criteria, approach |
+| `agent_context/DESIGN.md` | Design brief — decisions, constraints, challenges, open questions |
 | `agent_context/OUTLINE.md` | Thesis index (draft → approved) |
 
 See `agent_context/WORKFLOW.md` for the full human-in-the-loop pipeline and which files the agent reads or modifies per command.
