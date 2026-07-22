@@ -5,6 +5,15 @@
 > For design decisions, constraints, challenges, and open questions, see `DESIGN.md`.
 > For code and runtime architecture, see GitHub `awnt9/skillpolaris`.
 
+## Naming (thesis vs product)
+
+| Name | Role |
+|------|------|
+| **SkillPolaris** | Repository / software product only (`awnt9/skillpolaris`). Valid in harness, chats about code, Method/Experiments when referring to the implementation. |
+| **Thesis title** | Independent of the product name. Still TBD. |
+
+**Hard rule for academic prose:** never write “SkillPolaris” in thesis chapters, abstract, title, or keywords. Prefer “this work”, “the proposed system”, “the pipeline”, or the eventual thesis title once set.
+
 ## Motivation
 
 Career uncertainty is rising as people migrate across professions and sectors into a labor market that is both complex and difficult:
@@ -12,7 +21,7 @@ Career uncertainty is rising as people migrate across professions and sectors in
 - **Complex** — many occupation labels, and job offers for the same role ask for very different skills.
 - **Difficult** — especially for newcomers entering software, amid the conjuncture of programming agents and shifting skill expectations.
 
-Despite that difficulty, people keep entering programming. The working intuition is a medium-term paradox: most knowledge work trends toward software-related paths, while long-horizon automation may eventually reach further. SkillPolaris addresses the near-term information gap: grounding career decisions in labor-market evidence rather than generic advice.
+Despite that difficulty, people keep entering programming. The working intuition is a medium-term paradox: most knowledge work trends toward software-related paths, while long-horizon automation may eventually reach further. The thesis system addresses the near-term information gap: grounding career decisions in labor-market evidence rather than generic advice.
 
 ## Objective
 

@@ -4,8 +4,9 @@ You are an elite academic researcher and co-author of a Master's Thesis in Engin
 <critical_rules>
 1. COMMAND-DRIVEN BEHAVIOR: ONLY execute tools, file modifications, or specific skills when explicitly invoked via their slash commands (e.g., `/research`, `/write`). If the user communicates normally, reply naturally as a helpful assistant without triggering searches, code reads, or writes.
 2. LANGUAGE: All final academic content, thesis chapters, and internal summaries MUST be written in ENGLISH.
-3. SOURCE OF TRUTH: For any technical details, code, or architecture regarding SkillPolaris, use this GitHub repository: https://github.com/awnt9/skillpolaris/. Use `gh` to fetch raw files from GitHub if you need to read specific code.
-4. CONTEXT INITIALIZATION: Before starting a new session, ALWAYS read:
+3. NAMING: “SkillPolaris” is the product/repo name only (`awnt9/skillpolaris`). NEVER use it in thesis prose (title, abstract, keywords, or `.tex` chapters). Prefer “this work”, “the proposed system”, or the eventual thesis title. See `agent_context/PROJECT.md` § Naming.
+4. SOURCE OF TRUTH: For any technical details, code, or architecture regarding the SkillPolaris product, use this GitHub repository: https://github.com/awnt9/skillpolaris/. Use `gh` to fetch raw files from GitHub if you need to read specific code.
+5. CONTEXT INITIALIZATION: Before starting a new session, ALWAYS read:
    - `agent_context/STATUS.md` — progress and next steps
    - `agent_context/STRUCTURE.md` — repo layout
    - `agent_context/WORKFLOW.md` — agent prompt stack and read/write model
