@@ -383,11 +383,10 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{ Student's name% <-this % stops a space
-\thanks{Author: Student's name, contact email}% <-this % stops a space
-\thanks{Advisor 1: Advisor's name,  Advisor's department,  Advisor's University }% <-this % stops a space
-\thanks{Advisor 2 (if necessary): Advisor's name,  Advisor's department,  Advisor's University }% <-this % stops a space
-\thanks{Thesis dissertation submitted: July 2014}}
+\author{Antonio Jes\'{u}s Borrego Conejo% <-this % stops a space
+\thanks{Author: Antonio Jes\'{u}s Borrego Conejo}% <-this % stops a space
+\thanks{Advisor: Jose Manuel Garc\'{i}a Nieto}% <-this % stops a space
+\thanks{Thesis dissertation submitted: July 2026}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -410,8 +409,8 @@
 
 
 % The paper headers
-\markboth{Master Thesis Dissertation, Master in Computer Vision, July 2014}%
-{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
+\markboth{Master Thesis Dissertation, July 2026}%
+{Borrego Conejo: Master Thesis Dissertation}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
 % 
@@ -465,30 +464,34 @@ Your keywords here,...
 
 
 \section{Introduction}
+\label{sec:introduction}
 
-\IEEEPARstart{P}{roblem}  definition and working hypothesis
-
-\subsection{Subsection Heading Here}
-Subsection text here, if needed...
+\input{chapters/introduction.tex}
 
 
-\section{State of the art}
-You should copy and paste the state of the art submitted to the M8: Research and Technology Transfer Management.
+\section{State of the Art}
+\label{sec:state-of-the-art}
+% To be written.
+
+\section{Requirements and System Design}
+\label{sec:requirements}
+% To be written.
 
 \section{Method}
-
-Computational approach used to solve the problem
+\label{sec:method}
+% To be written.
 
 \section{Experiments}
-
-All the details about the experiments design and process
+\label{sec:experiments}
+% To be written.
 
 \section{Results}
-Explanation about the performance evaluation procedure and results analysis.
+\label{sec:results}
+% To be written.
 
 \section{Conclusions}
-
-Summary about the degree of achievement according to the given problem and the adopted hypothesis; and outline about open research lines...
+\label{sec:conclusions}
+% To be written.
 
 
 \appendices
@@ -533,9 +536,8 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-% Enable once the first \cite{} is added:
-% \bibliographystyle{IEEEtran}
-% \bibliography{../bibliography}
+\bibliographystyle{IEEEtran}
+\bibliography{../bibliography}
 
 % biography section
 % 
