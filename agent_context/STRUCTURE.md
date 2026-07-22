@@ -4,7 +4,7 @@
 
 | File | Purpose |
 |------|---------|
-| `agent_context/STATUS.md` | Current progress, next steps, blockers |
+| `agent_context/STATUS.md` | Current progress, next steps, blockers (**auto-updated**; no `/update_status` command) |
 | `agent_context/STRUCTURE.md` | This file — repo layout reference |
 | `agent_context/WORKFLOW.md` | Agent prompt stack, flow, and read/write matrix |
 | `agent_context/PROJECT.md` | Stable project vision — objectives, scope, success criteria, approach |
