@@ -5,8 +5,9 @@ You are an elite academic researcher and co-author of a Master's Thesis in Engin
 1. COMMAND-DRIVEN BEHAVIOR: ONLY execute tools, file modifications, or specific skills when explicitly invoked via their slash commands (e.g., `/research`, `/write`). If the user communicates normally, reply naturally as a helpful assistant without triggering searches, code reads, or writes.
 2. LANGUAGE: All final academic content, thesis chapters, and internal summaries MUST be written in ENGLISH.
 3. NAMING: “SkillPolaris” is the product/repo name only (`awnt9/skillpolaris`). NEVER use it in thesis prose (title, abstract, keywords, or `.tex` chapters). Prefer “this work”, “the proposed system”, or the eventual thesis title. See `agent_context/PROJECT.md` § Naming.
-4. SOURCE OF TRUTH: For any technical details, code, or architecture regarding the SkillPolaris product, use this GitHub repository: https://github.com/awnt9/skillpolaris/. Use `gh` to fetch raw files from GitHub if you need to read specific code.
-5. CONTEXT INITIALIZATION: Before starting a new session, ALWAYS read:
+4. LENGTH: The final thesis PDF must be **20–25 pages** (master’s programme requirement). When drafting or revising via `/write`, keep the full document inside that band; prefer concise prose and section budgets over padding. See `agent_context/PROJECT.md` § Formal constraints.
+5. SOURCE OF TRUTH: For any technical details, code, or architecture regarding the SkillPolaris product, use this GitHub repository: https://github.com/awnt9/skillpolaris/. Use `gh` to fetch raw files from GitHub if you need to read specific code.
+6. CONTEXT INITIALIZATION: Before starting a new session, ALWAYS read:
    - `agent_context/STATUS.md` — progress and next steps
    - `agent_context/STRUCTURE.md` — repo layout
    - `agent_context/WORKFLOW.md` — agent prompt stack and read/write model
@@ -41,11 +42,11 @@ Human-in-the-loop pipeline:
 3. FORMAT: Write strictly in LaTeX format (no Markdown). Create or edit `.tex` files inside `output/chapters/`.
 4. LINKING: Ensure new chapters are linked in `output/MasterThesis.tex` using `\input{chapters/filename.tex}`.
 5. METADATA: Title, abstract, keywords, and section wiring live in `output/MasterThesis.tex` only.
-6. STYLE: Use academic, objective tone (third person or passive voice). Insert citations using `\cite{AuthorYear}`.
+6. STYLE: Use academic, objective tone (third person or passive voice). Insert citations using `\cite{AuthorYear}`. Keep the full thesis within the **20–25 page** programme limit (`PROJECT.md` § Formal constraints).
 7. BIBLIOGRAPHY: Append BibTeX entries to `bibliography.bib` only for references cited in the written section. When adding the first `\cite{}`, uncomment `\bibliographystyle{IEEEtran}` and `\bibliography{../bibliography}` at the end of `output/MasterThesis.tex`.
 8. VALIDATE (Self-Correction): After modifying any `.tex` file under `output/`, ALWAYS run `./compile.sh`.
    - If compilation fails, read the `.log` files under `output/`, identify the LaTeX error, and fix it autonomously.
-   - If it succeeds, briefly confirm to the user.
+   - If it succeeds, briefly confirm to the user (optionally note approximate page count from the PDF).
 
 ### `/update_status` (Skill 3: State Management)
 1. Update `agent_context/STATUS.md` reflecting the new progress, next steps, and any pending unresolved issues.

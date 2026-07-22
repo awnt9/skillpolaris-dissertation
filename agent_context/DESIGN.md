@@ -22,6 +22,7 @@ Implementation details and current code live in GitHub `awnt9/skillpolaris`; thi
 
 - Prefer **open-data / public APIs** where possible: fewer legal risks, cleaner data, stable IDs.
 - Market scope is **programmers** in the current framing (`PROJECT.md`); final acquisition filters may still refine how “programmer market” is operationalized (see Open questions).
+- **Document length:** final thesis PDF must be **20–25 pages** (master’s programme directors). Budget sections accordingly; see `PROJECT.md` § Formal constraints.
 
 ## Layer challenges
 

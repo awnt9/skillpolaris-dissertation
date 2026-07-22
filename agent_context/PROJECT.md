@@ -14,6 +14,14 @@
 
 **Hard rule for academic prose:** never write “SkillPolaris” in thesis chapters, abstract, title, or keywords. Prefer “this work”, “the proposed system”, “the pipeline”, or the eventual thesis title once set.
 
+## Formal constraints (master’s programme)
+
+| Constraint | Requirement | Source |
+|------------|-------------|--------|
+| **Length** | **20–25 pages** (final compiled PDF) | Master’s programme directors |
+
+Writing and outline decisions must keep the full thesis inside this band: dense enough to cover Motivation → Conclusions, without padding. Prefer depth on Method / Experiments over verbose restatements. Target the IEEE one-column layout used in `output/MasterThesis.tex`.
+
 ## Motivation
 
 Career uncertainty is rising as people migrate across professions and sectors into a labor market that is both complex and difficult:
