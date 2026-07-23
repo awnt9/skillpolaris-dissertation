@@ -61,36 +61,67 @@ RemoteOK, Remotive, Arbeitnow, Himalayas, Jobicy, Landing.jobs, Greenhouse, Leve
 
 ### Transformer
 
-- Select metadata through a **recruiter-oriented** view of each offer.
-- Job-title / role-name metadata is a critical field for clustering, affinity, and metrics.
+Two outputs per offer (both required for the guidance model):
+
+| Output | Role |
+|--------|------|
+| **Recruiter-oriented metadata** | Fields used later in aggregations (standardized title/role, stack, years of experience, languages, …). |
+| **Ideal candidate** | Structured representation of the person the offer seeks; embedded and indexed so a user profile can be compared in the same space. |
+
+Job-title / role-name normalization is critical: rankings of standardized titles in a cohort are a primary user-facing signal.
 
 ### Application (guidance / metrics)
 
-- Select **valuable statistical metrics** (aggregations), not LLM answers.
-- Product is an information and metrics source, not a recommender chatbot.
+**Query path (settled intent):**
+
+1. User profile → embedding (same space as ideal candidates).
+2. Retrieve top-*k* nearest ideal candidates (e.g. order of hundreds; exact *k* is a Method parameter).
+3. Aggregate **metadata** of that cohort (not return the vacancies as recommendations).
+4. Frontend shows inspectable metrics, e.g. most frequent standardized titles, stack-fit % per title, mean experience required, language requirement rates.
+
+Framing: **profile-conditioned aggregation** / retrieval-conditioned statistics. Embeddings = cohort filter; answers = deterministic aggregates. Information system, not recommender, not RAG.
+
+**Observability:** Langfuse (or equivalent) for tracing transform LLM calls; useful for monitoring and for LLM-as-judge evaluation of transform outputs.
+
+## Evaluation plan (thesis-measurable)
+
+Proximal product vision (“better career decisions / long-term goals”) is **not** the primary experimental target — see `PROJECT.md` § Success Criteria.
+
+| Instrument | What it evaluates | Notes |
+|------------|-------------------|--------|
+| **Golden dataset** | Transform quality vs author-defined labels/criteria on a curated offer sample | Primary human ground truth |
+| **LLM-as-judge** | Quality of model-generated transform fields (metadata / ideal candidate) | Auxiliary; rubric + monitoring (e.g. Langfuse); not the sole success metric |
+| **Aggregation checks** | Backend metrics match independent recomputation on the same *k* neighbors | Deterministic; no LLM |
+| **Pipeline / *k*-sensitivity** | Feasibility, coverage, stability of rankings/% when *k* changes | Reproducibility of the cohort slice |
+| **Longitudinal user outcomes** | Employment / long-term goals | **Out of scope** as evaluable experiment; keep as proximal vision only |
 
 ## Decision log (settled for harness)
 
 1. **Statistics, not RAG** as the user-facing paradigm — see `PROJECT.md`.
 2. **Programmer market first** — specialization over breadth.
 3. **Pipeline + metrics app** as the solution shape.
-4. **Other markets** → twin extractors / separate indexes later; not one shared Qdrant corpus.
-5. **RAG roadmap** → out of scope for this thesis.
+4. **Transform = metadata + ideal candidate**; guidance = top-*k* proximity then **aggregate metadata** (not rank jobs).
+5. **Success:** proximal vision vs evaluable metrics split as above; LLM-as-judge only on transform quality (auxiliary).
+6. **Other markets** → twin extractors / separate indexes later; not one shared Qdrant corpus.
+7. **RAG roadmap** → out of scope for this thesis.
 
 ## Open questions
 
 - Exact operational definition of the “programmer market” filter (depends on the final acquisition strategy).
 - Which acquisition strategy (or hybrid) becomes the thesis Method baseline.
 - Which subset of candidate sources is implemented and evaluated.
+- Exact *k*, distance metric, and embedding model version (document for reproducibility).
+- Operational definition of stack-fit and title standardization.
 - Which metric set is “valuable” enough for the Experiments / Results chapters.
+- Alternatives to compare later if needed: occupation/cluster stats without kNN; global aggregates as baseline.
 
 ## Mapping to thesis chapters (guidance only)
 
 | Design material | Likely chapter |
 |-----------------|----------------|
-| Motivation, scope, non-goals | §1 Introduction |
-| Related systems, ESCO/taxonomies, job-mining literature | §2 State of the Art |
-| NFRs, sources, strategy trade-offs | §3 Requirements and System Design |
-| Pipeline, transformer schema, aggregations | §4 Method |
-| Corpus coverage, metrics validation | §5–6 Experiments / Results |
-| Twin markets, RAG roadmap | §7 Conclusions / future work |
+| Motivation, scope, non-goals, high-level solution | §1 Introduction |
+| Related systems, ESCO/taxonomies, job-mining vs recommenders | §2 State of the Art |
+| NFRs, sources, strategy trade-offs, observability (Langfuse) | §3 Requirements and System Design |
+| Pipeline, transform schema, embedding space, *k*, aggregation formulas | §4 Method |
+| Golden set, LLM-as-judge protocol, aggregation/*k* checks, coverage | §5–6 Experiments / Results |
+| Twin markets, RAG roadmap, longitudinal outcomes | §7 Conclusions / future work |

@@ -58,22 +58,34 @@ Rationale:
 
 ## Success Criteria
 
-The project succeeds when users make better career decisions and, ultimately, find employment as a result of the strategic guidance the application provides — guided by **objective, reproducible statistics** from which users draw their own conclusions.
+Two levels (do not conflate in Experiments):
+
+| Level | Criterion | Role in thesis |
+|-------|-----------|----------------|
+| **Proximal (product vision)** | The user can make sound career decisions from the information the app provides; in the long run those decisions support professional goals. | Framing only — not the primary experimental metric |
+| **Evaluable (thesis)** | Pipeline and metrics are feasible, faithful to the corpus, and inspectable: transform quality, aggregation correctness/stability, coverage of the target market. | What §5–§6 measure |
+
+Guidance for users remains **objective, reproducible statistics** from which they draw their own conclusions — not LLM advice and not a ranked list of job openings.
+
+Detail of evaluation instruments (golden set, LLM-as-judge on transform, aggregation checks, *k*-sensitivity) lives in `DESIGN.md`.
 
 ## Core Approach
 
-**Proposed solution:** an offline **pipeline (extractor + transformer)** plus an application that surfaces **aggregated metrics**.
+**Proposed solution:** an offline **pipeline (extractor + transformer)** plus an application that surfaces **profile-conditioned aggregated metrics**.
 
-Collect and analyze large volumes of job offers automatically. Use LLMs and vector databases during **offline processing** to enrich and index the corpus. Present users with **deterministic, reproducible statistics** derived from that corpus — not LLM-generated advice about their profile.
+Collect and analyze large volumes of job offers automatically. Use LLMs and vector databases during **offline processing** to enrich and index the corpus. At query time, retrieve a cohort of nearby **ideal-candidate** representations for the user profile, then return **deterministic statistics over that cohort’s metadata** — not LLM-generated advice and not a ranked list of vacancies.
 
 ### Design Principle: Statistical Truth, Not RAG
 
-The LLM enriches the data pipeline; the user-facing layer answers with calculated facts:
+The LLM enriches the data pipeline; the user-facing layer answers with calculated facts. Embeddings support **cohort selection** (proximity); they are not the answer surface.
 
-- Affinity scores (e.g. "80% match with this occupation").
-- Skill demand frequencies (e.g. "technology X appears in 40% of offers for this role").
+Examples of user-facing outputs:
 
-This is not a conversational career chatbot. Insights must be traceable to the underlying dataset.
+- Most frequent standardized role titles in the retrieved cohort.
+- Stack-fit percentages per standardized role relative to the user profile.
+- Mean years of experience required, language requirements, etc., aggregated over the cohort.
+
+This is a labor-market **information** system (profile-conditioned aggregation), not a job recommender and not a conversational career chatbot. Insights must be traceable to the underlying vacancy metadata.
 
 **Why not RAG as the core:**
 
@@ -82,13 +94,17 @@ This is not a conversational career chatbot. Insights must be traceable to the u
 - Naive RAG over Qdrant does not repay its cost for the key market questions; those are answered better by aggregations than by retrieval + LLM.
 - The product intent is objective statistics so the user can form their own conclusions.
 
+**Why not a job recommender:**
+
+- Recommenders optimize item ranking (vacancies ↔ candidates). This work returns **distributions over a proximity cohort**, not “apply to these N jobs”.
+
 ## System Concept
 
 Three conceptual layers:
 
 1. **Acquisition** — automated collection of job offers from multiple sources.
-2. **Processing** — transform raw offers into structured, searchable representations (including an "ideal candidate" view per offer).
-3. **Guidance** — match the user profile against the corpus and surface statistical career intelligence through the application UX.
+2. **Processing** — transform each offer into (a) recruiter-oriented **metadata** and (b) an **ideal candidate** representation for embedding/indexing.
+3. **Guidance** — embed the user profile, retrieve the top-*k* nearest ideal candidates, **aggregate their metadata**, and surface inspectable career metrics in the application UX.
 
 ## Thesis Framing
 
