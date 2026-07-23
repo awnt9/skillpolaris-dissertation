@@ -28,3 +28,23 @@ On a medium-term horizon, therefore, software-related competence remains a ratio
 
 These two motives are complementary rather than contradictory.
 Structural demand for software-related skills continues to pull workers toward the field, while skill heterogeneity, rapid obsolescence, and shifting task content make the market costly to interpret---especially for early-career entrants and those migrating from other sectors.
+
+\subsection{Problem Statement}
+\label{sec:problem-statement}
+
+The motivational frictions above create a concrete information need: early-career and transitioning workers must infer what the software labor market currently demands, and how their own skill profiles relate to that demand, without relying on generic advice.
+Existing research already shows that online vacancies are a rich but unstructured source for skill identification and market monitoring~\cite{Khaouja2021}.
+In parallel, deployed recruitment systems typically optimize a different objective---matching candidates to individual job postings through recommender-style retrieval and ranking~\cite{Zhao2021,Alsaif2022}.
+What remains insufficiently addressed for career \emph{strategy} is a user-facing layer that turns a curated vacancy corpus into \emph{inspectable, reproducible aggregates} (for example, occupation-level affinity and skill-demand frequencies) from which individuals can draw their own conclusions, rather than a ranked list of openings or a narrative recommendation.
+
+Accordingly, the engineering problem addressed in this thesis is to design and implement a system that (i)~acquires and structures job offers from the software labor market and (ii)~exposes deterministic statistical metrics over that corpus to support career decisions such as where aptitude is highest and where scarce learning time yields the best expected return.
+
+Two scope decisions delimit this problem.
+First, the intended outputs are objective aggregations, not a conversational retrieval-augmented generation (RAG) assistant as the primary interface: the market questions that motivate the work (prevalence of skills, comparative fit across occupations, and related distributional summaries) are answered more directly by corpus-level statistics than by retrieval followed by generative explanation.
+A production-grade conversational layer on top of the same dataset is treated as future work of separate scope; the value of the present contribution is placed in the dataset and in the metrics derived from it.
+Second, the domain is restricted to the programmer~/~software labor market.
+Offers in this segment tend to share a relatively homogeneous surface form (role title, technology stack, and compensation-related signals), which makes systematic extraction, structuring, and aggregation tractable; whether the same pipeline transfers unchanged to less homogeneous occupations is left open and is not claimed here.
+This domain choice is also consistent with the motivational focus on software entry and mid-career migration developed in Section~\ref{sec:motivation}.
+
+The proposed solution shape is an offline pipeline that combines acquisition (extraction) and enrichment (transformation) of vacancies, together with an application that surfaces aggregated metrics to the user.
+Implementation choices, non-functional requirements, and design alternatives are developed in later chapters; the introduction only fixes the problem, its boundaries, and this high-level solution outline.
