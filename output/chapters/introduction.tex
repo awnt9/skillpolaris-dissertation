@@ -63,3 +63,34 @@ The evaluable objectives below therefore focus on building the pipeline and on v
   \item Define and expose profile-conditioned statistical metrics---computed by retrieving a neighborhood of ideal candidates for a user profile and aggregating that cohort's metadata---through an application interface that presents inspectable aggregates rather than ranked vacancy recommendations or LLM-generated narratives.
   \item Evaluate the pipeline and metrics with respect to transform quality, correctness and stability of the aggregations, and feasibility within the target market, using instruments appropriate to those claims (for example, a curated reference sample and deterministic recomputation checks), within the scope limits fixed in Section~\ref{sec:problem-statement}.
 \end{enumerate}
+
+\subsection{Contributions}
+\label{sec:contributions}
+
+The main contributions of this thesis are summarized as follows:
+
+\begin{enumerate}
+  \item An acquisition and transformation pipeline for software job vacancies that produces, for each offer, recruiter-oriented metadata and an ideal-candidate representation suitable for indexing and later aggregation.
+  \item A guidance approach based on \emph{profile-conditioned aggregation}: given a user profile, a proximity cohort of ideal candidates is retrieved and statistical metrics are computed over that cohort's metadata, yielding an information layer for career strategy rather than vacancy recommendations or conversational RAG answers.
+  \item An application surface that presents those metrics in inspectable form (for example, frequent standardized roles in the cohort, stack-fit indicators, and related distributional summaries), so that users can draw their own conclusions from evidence grounded in the corpus.
+  \item An evaluation design aligned with the stated claims---centered on transform quality, aggregation correctness and stability, and feasibility in the target market---while treating long-horizon career outcomes as proximal product vision rather than as a directly measured experimental endpoint.
+\end{enumerate}
+
+\subsection{Working Hypothesis}
+\label{sec:working-hypothesis}
+
+The working hypothesis of this thesis is that, for career-strategy questions in the software labor market, \emph{profile-conditioned statistical aggregates}---obtained by retrieving a proximity cohort of ideal-candidate representations and summarizing that cohort's structured metadata---provide inspectable and reproducible market evidence that is better aligned with informed individual decision-making than either (i)~vacancy-level recommendation rankings or (ii)~conversational retrieval-augmented generation over the same corpus.
+
+In operational terms, the hypothesis predicts that a pipeline which couples offline enrichment (metadata and ideal candidates) with deterministic cohort aggregations can be implemented with measurable transform quality and aggregation fidelity, and that the resulting indicators remain stable enough under reasonable cohort-size choices to support interpretation by the user.
+Confirmation is sought through the evaluation instruments outlined in the objectives and contributions (reference samples, recomputation checks, and related feasibility analyses), not through longitudinal observation of employment outcomes.
+
+\subsection{Document Structure}
+\label{sec:document-structure}
+
+The remainder of this document is organized as follows.
+Section~II reviews related work on skill extraction from online vacancies, recruitment recommenders, and adjacent approaches to labor-market intelligence, in order to situate the present information-oriented design.
+Section~III states requirements and the system design, including scope constraints and the separation between offline enrichment and the metrics-facing application.
+Section~IV describes the method: acquisition, transformation into metadata and ideal-candidate representations, embedding-based cohort retrieval, and the aggregation of user-facing metrics.
+Sections~V and~VI present the experimental protocol and results for transform quality, aggregation correctness and stability, and feasibility within the target market.
+Section~VII concludes and outlines future work, including possible extensions beyond the software domain and conversational layers built on the same dataset.
+The detailed subsection structure of Sections~II--VII may be refined as the corresponding chapters are developed.
