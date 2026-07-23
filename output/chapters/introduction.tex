@@ -35,16 +35,31 @@ Structural demand for software-related skills continues to pull workers toward t
 The motivational frictions above create a concrete information need: early-career and transitioning workers must infer what the software labor market currently demands, and how their own skill profiles relate to that demand, without relying on generic advice.
 Existing research already shows that online vacancies are a rich but unstructured source for skill identification and market monitoring~\cite{Khaouja2021}.
 In parallel, deployed recruitment systems typically optimize a different objective---matching candidates to individual job postings through recommender-style retrieval and ranking~\cite{Zhao2021,Alsaif2022}.
-What remains insufficiently addressed for career \emph{strategy} is a user-facing layer that turns a curated vacancy corpus into \emph{inspectable, reproducible aggregates} (for example, occupation-level affinity and skill-demand frequencies) from which individuals can draw their own conclusions, rather than a ranked list of openings or a narrative recommendation.
+What remains insufficiently addressed for career \emph{strategy} is a user-facing layer that turns vacancy data into \emph{inspectable, reproducible aggregates} conditioned on the user's profile---from which individuals can draw their own conclusions---rather than a ranked list of openings or a narrative recommendation.
 
-Accordingly, the engineering problem addressed in this thesis is to design and implement a system that (i)~acquires and structures job offers from the software labor market and (ii)~exposes deterministic statistical metrics over that corpus to support career decisions such as where aptitude is highest and where scarce learning time yields the best expected return.
+Accordingly, the engineering problem addressed in this thesis is to design and implement a system that (i)~acquires software job offers and transforms each into structured metadata together with an ideal-candidate representation, and (ii)~given a user profile, selects a proximity cohort in that representation space and exposes deterministic statistical metrics over the cohort's metadata to support decisions such as where aptitude is highest and where scarce learning time yields the best expected return.
 
 Two scope decisions delimit this problem.
-First, the intended outputs are objective aggregations, not a conversational retrieval-augmented generation (RAG) assistant as the primary interface: the market questions that motivate the work (prevalence of skills, comparative fit across occupations, and related distributional summaries) are answered more directly by corpus-level statistics than by retrieval followed by generative explanation.
-A production-grade conversational layer on top of the same dataset is treated as future work of separate scope; the value of the present contribution is placed in the dataset and in the metrics derived from it.
+First, the intended outputs are objective aggregations, not a conversational retrieval-augmented generation (RAG) assistant and not a vacancy recommender as the primary interface: embeddings may be used to define a relevant cohort, but the answers returned to the user are corpus-derived statistics (for example, frequent standardized role titles in the cohort, stack-fit rates, or typical experience requirements), not generative advice and not a shortlist of jobs to apply to.
+A production-grade conversational layer on top of the same dataset is treated as future work of separate scope; the value of the present contribution is placed in the enriched dataset and in the metrics derived from it.
 Second, the domain is restricted to the programmer~/~software labor market.
 Offers in this segment tend to share a relatively homogeneous surface form (role title, technology stack, and compensation-related signals), which makes systematic extraction, structuring, and aggregation tractable; whether the same pipeline transfers unchanged to less homogeneous occupations is left open and is not claimed here.
 This domain choice is also consistent with the motivational focus on software entry and mid-career migration developed in Section~\ref{sec:motivation}.
 
-The proposed solution shape is an offline pipeline that combines acquisition (extraction) and enrichment (transformation) of vacancies, together with an application that surfaces aggregated metrics to the user.
+The proposed solution shape is therefore an offline acquisition and transformation pipeline, plus an application that performs profile-conditioned aggregation over a retrieved cohort and presents the resulting metrics to the user.
 Implementation choices, non-functional requirements, and design alternatives are developed in later chapters; the introduction only fixes the problem, its boundaries, and this high-level solution outline.
+
+\subsection{Research Objectives}
+\label{sec:research-objectives}
+
+The general objective of this thesis is to design and implement a labor-market intelligence system for the software domain that acquires vacancies, transforms them into metadata and ideal-candidate representations, and exposes deterministic, reproducible statistical metrics over a profile-conditioned cohort so that users can form their own career conclusions---in particular, assessing occupational fit and prioritizing learning investments---without relying on a conversational recommender or generative advice layer.
+
+At the product level, success is understood proximally as enabling sound career decisions from inspectable market information; long-horizon professional outcomes are acknowledged as the ultimate aspiration of such a system but are not treated as directly measurable targets within this thesis.
+The evaluable objectives below therefore focus on building the pipeline and on verifying that the derived metrics are feasible, faithful to the underlying data, and inspectable.
+
+\begin{enumerate}
+  \item Design and implement an acquisition pipeline that collects software-related job offers from selected sources into a consolidated store, under practical constraints of cost, legality, and operational reliability (including idempotent ingestion and a standardized offer representation).
+  \item Design and implement a transformation stage that, for each offer, produces recruiter-oriented metadata suitable for aggregation and an ideal-candidate representation suitable for embedding-based proximity search, including reliable treatment of standardized role~/~job-title information.
+  \item Define and expose profile-conditioned statistical metrics---computed by retrieving a neighborhood of ideal candidates for a user profile and aggregating that cohort's metadata---through an application interface that presents inspectable aggregates rather than ranked vacancy recommendations or LLM-generated narratives.
+  \item Evaluate the pipeline and metrics with respect to transform quality, correctness and stability of the aggregations, and feasibility within the target market, using instruments appropriate to those claims (for example, a curated reference sample and deterministic recomputation checks), within the scope limits fixed in Section~\ref{sec:problem-statement}.
+\end{enumerate}
