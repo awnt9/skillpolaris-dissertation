@@ -1,0 +1,41 @@
+\subsection{Skill Extraction and Job-Ad Analytics}
+\label{sec:sota-skill-extraction}
+
+Online job advertisements have become a primary empirical source for observing employer demand.
+Because vacancy text is unstructured, a substantial literature focuses on identifying the skills and competencies that postings require.
+Khaouja~\emph{et al.} systematically surveyed 108 studies on skill identification from online job ads, documenting heterogeneity in skill bases, extraction methods, target sectors, and granularity, as well as a range of downstream goals from labor-market monitoring to curriculum design~\cite{Khaouja2021}.
+Complementary work extracts soft-skill requirements and relates them to wage and demographic patterns~\cite{Calanca2019}, while domain-specific content analyses of information systems and related advertisements illustrate how technical and non-technical expectations cluster within early-career roles~\cite{Kennan2008}.
+
+Taken together, this line of research establishes that vacancies encode actionable market signals, but that turning raw text into reliable structured fields remains a non-trivial pipeline problem.
+The present work builds on that premise for the software labor market: offline enrichment is treated as a first-class engineering task whose outputs (structured metadata and comparable candidate representations) feed later statistical guidance.
+
+\subsection{Occupation Taxonomies and Title Standardization}
+\label{sec:sota-taxonomies}
+
+A recurring obstacle in vacancy analytics is the instability of job titles: employers use overlapping labels for roles that differ in skill mix, and the same underlying occupation may appear under many surface forms.
+European Skills, Competences, Qualifications and Occupations (ESCO) and related taxonomies provide standardized occupation and skill vocabularies that support comparability across postings and jurisdictions.
+Recent systems such as CareerBERT combine ESCO with large vacancy corpora (e.g., EURES) to embed resumes and generic occupations in a shared space for matching~\cite{Rosenberger2025}.
+Such approaches underline the value of title~/~occupation normalization as infrastructure for any downstream comparison between people and market demand.
+
+In this thesis, standardized role information is treated as a critical metadata field for cohort-level summaries (for example, rankings of frequent normalized titles).
+Whether normalization follows a fixed taxonomy, emergent clustering, or a hybrid scheme is a Method decision; the state of the art makes clear that some form of title standardization is a prerequisite for interpretable aggregates.
+
+\subsection{Job Recommendation and Person--Job Matching}
+\label{sec:sota-recommenders}
+
+A second major stream concerns e-recruiting recommenders that retrieve or rank vacancies for candidates (and, symmetrically, candidates for recruiters).
+Surveys of job recommender systems describe content-based, collaborative, and hybrid matching as responses to information overload on online recruiting platforms~\cite{AlOtaibi2012}.
+Industrial and research systems increasingly rely on embedding-based retrieval and multi-stage ranking: for example, fused embeddings with approximate nearest-neighbor search for large-scale job--candidate matching~\cite{Zhao2021}, and bidirectional NLP recommenders that score resumes against postings and vice versa~\cite{Alsaif2022}.
+CareerBERT similarly optimizes recommendation quality for counselors and seekers, albeit against standardized ESCO occupations rather than only individual ads~\cite{Rosenberger2025}.
+
+These systems are successful at their stated objective---surfacing relevant \emph{items}---but that objective differs from career \emph{strategy} support.
+Their typical outputs are ranked lists of jobs or occupation labels; evaluation centers on retrieval and ranking metrics (e.g., click-through or ranking quality), not on inspectable distributional summaries of market requirements conditioned on a user profile.
+
+\subsection{From Matching to Market Intelligence: Gap and Positioning}
+\label{sec:sota-gap}
+
+Across the strands above, two capabilities are comparatively mature: (i)~extracting structured signals from vacancy text, and (ii)~matching people to jobs or taxonomy nodes via similarity search.
+What remains less developed as an integrated user-facing paradigm is \emph{profile-conditioned market intelligence}: using proximity in a representation space only to select a relevant cohort of enriched offers, then returning deterministic aggregates over that cohort's metadata---frequent standardized roles, stack-fit rates, experience distributions, and related indicators---so that users can interpret the market and decide for themselves.
+
+Conversational retrieval-augmented generation (RAG) over vacancy corpora is a plausible alternative interface, but it targets narrative question answering rather than reproducible statistical summaries; production-grade conversational guidance on top of an enriched dataset is treated here as future work rather than as the core contribution~\cite{Gao2023}.
+The present thesis therefore positions itself between vacancy analytics and job recommendation: it reuses enrichment and embedding ideas from both, while defining the guidance layer as an information system of inspectable aggregates rather than as a recommender or a chatbot.
